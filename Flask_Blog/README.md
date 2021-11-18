@@ -743,6 +743,16 @@ db = SQLAlchemy(app)
 
 
 
+### Create database
+
+In the terminal, we open the python interface. Create the database in the same folder where the ```db``` was imported.
+
+```python
+db.create_all()
+```
+
+
+
 ## Create Tables
 
 We create each class model for each table.
@@ -818,4 +828,6 @@ class Post(db.model):
     ```
 
     * ```ForeignKey```: the first argument is the parent ```table```name
+
+
 
