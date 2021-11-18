@@ -720,13 +720,13 @@ def register():
 
 
 
-# Database
+# Chapter 4 - Database
 
 Using ```SQLachemy```, this module will easily to change the database without changing the Python code. We just change the URL for the ```PostgreSQL``` or ```SQLite```. We will using the ```SQlite``` for development environment and the ```PostgreSQL``` for our production environment.
 
 
 
-## Create a Database
+## Database File
 
 ### Set the location
 
@@ -752,6 +752,75 @@ db.create_all()
 ```
 
 
+
+### Access to database
+
+* **Add users**
+
+  ```python
+  from flaskblog import User, Post
+  
+  user_1 = User(username='Xiao', email='xiao@gmail.com', password='password')
+  db.session.add(user_1)
+  db.session.commit()
+  ```
+
+* **Get all users**
+
+  ```
+  User.query.all()
+  ```
+
+* **Get the First users**
+
+  ```python
+  User.query.first()
+  ```
+
+* **Get users with filter**
+
+  ```python
+  User.query.filter_by(username='Xiao').all()
+  ```
+
+* **Get attributes**
+
+  Get user_id or get user with id = `
+
+  ```python
+  user = User.query.first()
+  user.id
+  ```
+
+  or
+
+  ```
+  user = User.query.get(1)
+  ```
+
+
+
+All will be similar to create a post in post table. When we created a post, it will automatically generate a date_posted with the current datetime. After creating, we can check on the ```user``` table by ```user.posts```.
+
+### Delete data in database
+
+* **Delete all data**
+
+  This will delete all the structure in database.
+
+  ```python
+  db.drop_all()
+  ```
+
+* **Withdraw all data structure**
+
+  After ```drop_all()```, we use ```create_all()``` to create the database structure back.
+
+  ```python
+  db.create_all()
+  ```
+
+  
 
 ## Create Tables
 
@@ -830,4 +899,6 @@ class Post(db.model):
     * ```ForeignKey```: the first argument is the parent ```table```name
 
 
+
+# Chapter 5 - Restructured the module to a package
 
