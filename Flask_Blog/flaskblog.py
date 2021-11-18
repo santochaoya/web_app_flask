@@ -77,5 +77,5 @@ def login():
             flash(f'Login unsuccessfully! Please check your username and password.', category='danger')
     return render_template('login.html', title='Login', form=form)
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
