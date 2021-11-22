@@ -1,4 +1,6 @@
 from flask import render_template, flash, redirect, url_for
+from flask_login import login_user
+
 from flaskblog.form import RegistrationForm, LoginForm
 from flaskblog.models import User, Post
 from flaskblog import app, db, bcrypt
@@ -44,8 +46,9 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.username.data == 'santochaoya' and form.password.data == '12345678':
-            flash(f'You have been logged in!', category='success')
+        user = User.query.filter_by(username=form.username.data)
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
             return redirect(url_for('home'))
         else:
             flash(f'Login unsuccessfully! Please check your username and password.', category='danger')
