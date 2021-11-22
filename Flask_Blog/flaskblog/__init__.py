@@ -16,4 +16,6 @@ db = SQLAlchemy(app)
 # Hash the password
 bcrypt = Bcrypt()
 
+
+
 from flaskblog import routes
