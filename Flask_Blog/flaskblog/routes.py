@@ -1,17 +1,7 @@
-from flask import Flask, render_template, flash, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from form import RegistrationForm, LoginForm
-import os
-
-app = Flask(__name__)
-
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
-
-from models import User, Post
+from flask import render_template, flash, redirect, url_for
+from flaskblog.form import RegistrationForm, LoginForm
+from flaskblog.models import User, Post
+from flaskblog import app
 
 
 posts = [
@@ -30,6 +20,7 @@ posts = [
 ]
 
 @app.route("/")
+@app.route("/home")
 def home():
     return render_template('home.html', posts=posts)
 
@@ -55,6 +46,3 @@ def login():
         else:
             flash(f'Login unsuccessfully! Please check your username and password.', category='danger')
     return render_template('login.html', title='Login', form=form)
-
-if __name__ == '__main__':
-    app.run(debug=True)
