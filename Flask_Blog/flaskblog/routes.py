@@ -13,8 +13,8 @@ import os
 @app.route("/")
 @app.route("/home")
 def home():
-    page = request.args.get('page')
-    posts = Post.query.paginate(per_page=5)
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('home.html', posts=posts)
 
 @app.route('/about')
@@ -149,3 +149,10 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('home'))
+
+@app.route("/")
+@app.route("/home")
+def home():
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template('home.html', posts=posts)
