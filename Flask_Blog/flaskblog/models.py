@@ -28,6 +28,11 @@ class User(db.Model, UserMixin):
 
     @staticmethod
     def verify_reset_token(token):
+        """Get user with the token.
+
+        :param token: Generated token
+        :return: user with the specific token.
+        """
         s = Serializer(app.config('SECRET_KEY'))
         try:
             user_id = s.loads(token)['user_id']
