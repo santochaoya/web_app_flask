@@ -19,15 +19,21 @@ bcrypt = Bcrypt()
 
 # Login Manager
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
 # Config email infomation
 app.config['MAIL_SERVER'] = 'smtp.126.com'
 app.config['PORT'] = 465
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'chaoya_d@126.com'
-app.config['MAIL_PASSWORD'] = 'JinYan1211'
+app.config['MAIL_USERNAME'] = '<sender email here>'
+app.config['MAIL_PASSWORD'] = '<password here>'
 mail = Mail(app)
 
-from flaskblog import routes
+from flaskblog.users.routes import users
+from flaskblog.posts.routes import posts
+from flaskblog.main.routes import main
+
+app.register_blueprint(users)
+app.register_blueprint(posts)
+app.register_blueprint(main)
