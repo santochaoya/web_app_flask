@@ -5,7 +5,7 @@
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Reset Password</legend>
-                <dir class="form-group">
+                <div class="form-group">
                     {{ form.email.label(class="form-content-label") }}
                     {% if form.email.errors %}
                         {{ form.email(class="form-control form-control-lg") }}
@@ -15,11 +15,11 @@
                     {% else %}
                         {{ form.email(class="form-control form-control-lg") }}
                     {% endif %}
-                </dir>
+                </div>
             </fieldset>
-            <dir class="form-group">
+            <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}
-            </dir>
+            </div>
         </form>
     </div>
 {% endblock %}
