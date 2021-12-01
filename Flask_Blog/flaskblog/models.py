@@ -23,8 +23,8 @@ class User(db.Model, UserMixin):
         :param expires_sec: Expires seconds for a token
         :return: token
         """
-        s = Serializer(app.config('SECRET_KEY'), expires_sec)
-        return s.dumps({'user_id': self.id}).decodes('utf-8')
+        s = Serializer(app.config['SECRET_KEY'], expires_sec)
+        return s.dumps({'user_id': self.id}).decode('utf-8')
 
     @staticmethod
     def verify_reset_token(token):
@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
         :param token: Generated token
         :return: user with the specific token.
         """
-        s = Serializer(app.config('SECRET_KEY'))
+        s = Serializer(app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']
         except:
@@ -52,5 +52,6 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+
 
 

@@ -165,7 +165,7 @@ def user_posts(username):
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Passowrd Reset Request',
-                  sender='santochaoya2@gmail.com',
+                  sender='chaoya_d@126.com',
                   recipients=[user.email])
     msg.body = f'''
     To reset your password, please visit the link below:
